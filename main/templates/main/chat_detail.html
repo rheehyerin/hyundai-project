@@ -1,0 +1,54 @@
+
+<div class="comments__list">
+  <div class = 'col-md-12 money'>
+    Car Pay : {{ money }}원
+  </div>
+    <hr/>
+    <div class="comments__item">
+        {% for comment in comments %}
+        <div class="comments-item__body">
+            <div class="comments-item__info">
+                <div class="comments-item-info__author" style="float:right;">
+                    {# {{ comment.author }} #}
+                </div></br>
+                <div class="comments-item-info__divider"><i class="fa fa-circle"></i></div>
+                <div class="comments-item__content" style="float:right; color:gray;"><br/>{{ comment.message }}</div><br/><br/>
+                <div class="comments-item__content">음성 AI : <br/> {{ comment.message_response }}</div>
+                <div class="comments-item__content">
+                {% if comment.location %}
+                    <h1>{{ comment.location.title }}</h1>
+
+
+                        {{ comment.location.lnglat }}
+
+                        <div id="map" style="width: 300px; height: 300px;"></div>
+                        <script type="text/javascript">
+                        var map;
+                        function initMap() {
+                            var position = {lat: {{ comment.location.lat }}, lng: {{ comment.location.lng }} };
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                center: position,
+                                zoom: 15
+                            });
+                            var marker = new google.maps.Marker({
+                                position: position,
+                                map: map
+                            });
+                        }
+                        </script>
+
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkTPJF4srj46OOtYQqcT02zn_ArfUNsfk&callback=initMap"></script>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="comment__new">
+    <form name="comment_new" action="{% url 'main:chat_comment' %}" method="POST">
+        {% csrf_token %}
+        <textarea class="form-control" name="message" rows="1" placeholder="Write your comment here"></textarea>
+        <button type="submit" id="comment__new" class="comment__new" class="btn btn-primary" value="SAVE" style="margin-top:20px;">SAVE</button>
+    </form>
+</div>

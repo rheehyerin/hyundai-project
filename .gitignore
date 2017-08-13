@@ -1,0 +1,17 @@
+__pycache__
+*.pyc
+
+.sass-cache
+*.map
+
+db.sqlite3
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+media
+staticfiles
+
+.project
+.DS_Store
+

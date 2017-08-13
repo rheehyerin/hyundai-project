@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% for obj in location_list %}
+<h1>{{ location.title }}</h1>
+
+
+{{ location.lnglat }}
+
+<div id="map" style="width: 300px; height: 300px;"></div>
+<script type="text/javascript">
+var map;
+function initMap() {
+    var position = {lat: {{ location.lat }}, lng: {{ location.lng }} };
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: position,
+        zoom: 8
+    });
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map
+    });
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkTPJF4srj46OOtYQqcT02zn_ArfUNsfk&callback=initMap"></script>
+{% endfor %}
+
+{% endblock %}

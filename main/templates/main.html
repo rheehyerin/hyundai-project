@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            Hello
+            <br/>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'accounts:login' %}"> 로그인</a>
+            {% endif %}
+        </div>
+        {% if user.is_authenticated %}
+            <div class="col-md-12">
+               안녕하십니까, 반갑습니다 {{ user.username }}님
+            </div>
+            <!--
+            <div class="col-md-6 comments">
+                {% include 'comments_detail.html' %}
+            </div>
+            -->
+            <div class="col-md-6">
+                <a href="{% url 'main:chat' %}"> 챗봇</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script>
+var js_root = "{% static 'js/comment_add.js'%}"
+</script>
+<script src="{% static 'js/comment_add.js' %}"></script>
+{% endblock %}

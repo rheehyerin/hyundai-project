@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% load socialaccount %}
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            {% block social_login %} {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

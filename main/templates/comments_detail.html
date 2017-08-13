@@ -1,0 +1,30 @@
+
+<div class="comments__list">
+    <hr/>
+    <div class="comments__item">
+        {% for comment in comments %}
+        <div class="comments-item__body">
+            <div class="comments-item__info">
+                <div class="comments-item-info__author" style="float:right;">
+                    {{ comment.author }}
+                </div></br>
+                <div class="comments-item-info__divider"><i class="fa fa-circle"></i></div>
+                <div class="comments-item__content" style="float:right;">{{ comment.message }}</div><br/>
+                <div class="">챗봇</div>
+                <div class="comments-item__content">{{ comment.message_response }}
+                 {% for obj in location %}
+                    {{ obj.title }}
+                 {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="comment__new">
+    <form name="comment_new" action="{% url 'main:text_comment' %}" method="POST">
+        {% csrf_token %}
+        <textarea class="form-control" name="message" rows="1" placeholder="Write your comment here"></textarea>
+        <button type="submit" id="comment__new" class="comment__new" class="btn btn-primary" value="SAVE">SAVE</button>
+    </form>
+</div>

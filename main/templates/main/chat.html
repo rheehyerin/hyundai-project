@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    <div class="col-md-12" style="height:150px;background-color:#79ABFF; margin-bottom: 20px;">
+    <div class="col-md-6 col-md-offset-3" style="padding-top:30px;">
+    <img src="{% static 'img/hyundai.png' %}" class="img-reponsive" style="max-width:250px; margin-right:15px;"><span style="font-size:23pt; color:white;">차량 내 감성 비서 시연</span>
+    </div>
+    </div>
+      <form action="{% url 'main:chat' %}" method="POST">
+        {% csrf_token %}
+        <div class="col-md-6">
+        <div> Good Morning </div>
+        <input type="radio" name="time_" value="am8" style="margin-top:5px;">오전 8시<br>
+        <div> After Work </div>
+        <input type="radio" name="time_" value="pm6" style="margin-top:5px;">오후 6시<br>
+        </div>
+        <div class="col-md-6">
+        <div> Drive Through </div>
+        <input type="radio" name="time_" value="sbuck" style="margin-top:5px;">스타벅스<br>
+        <input type="radio" name="time_" value="mac" style="margin-top:5px;">맥도날드<br>
+        </div>
+        <div class="col-md-12">
+        <input type="submit" value="Submit" style="margin-top:20px;">
+
+      </form>
+      <form action="{% url 'main:flush' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="초기화" style="margin-top:20px;">
+      </form>
+      </div>
+    </div>
+    <div class="row">
+        {% if user.is_authenticated %}
+          <div class="col-md-6 comments">
+              {% include 'main/chat_detail.html' %}
+          </div>
+        {% else %}
+          로그인하세요
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+<script>
+var js_root = "{% static 'js/comment_add.js'%}"
+</script>
+<script src="{% static 'js/comment_add.js' %}"></script>
+
+{% endblock %}
