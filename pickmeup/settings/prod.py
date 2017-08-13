@@ -1,4 +1,3 @@
-import os
 from .settings import *
 
 DEBUG = False
@@ -6,11 +5,14 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "..", "media")
 
-
-DATABASES = { 'default': {
-'ENGINE': 'django.db.backends.postgresql', 'hyundai_project': 'ubuntu',
-'USER': 'ubuntu',
-'PASSWORD': 'withaskdjango!',
-'HOST': '127.0.0.1', },
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ.get('DJANGO_DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.environ.get('DJANGO_DATABASE_NAME', 'hyemin'),
+        'USER': os.environ.get('DJANGO_DATABASE_USER', 'ubuntu'),
+        'PASSWORD': os.environ.get('DJANGO_DATABASE_PASSWORD', 'bhunjimko123'),
+        'HOST': os.environ.get('DJANGO_DATABASE_HOST', '127.0.0.1'),
+    }
 }
